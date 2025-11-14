@@ -28,10 +28,8 @@
     color:#0b1220}
     
     body > main {
-    transform: scale(1.08);         /* 1.08 = 8% bigger; change to taste */
-    transform-origin: top center;
-    /* optional to avoid horizontal scrollbar */
     width: 100%;
+    margin-top: 80px;
   }
     .container{
     max-width:var(--max);
@@ -168,12 +166,32 @@
     .center-card p{color:var(--muted);max-width:760px;margin:0 auto}
 
     /* CONTACT / CONNECT */
-    section.connect{padding:72px 0;background:linear-gradient(180deg,#587bff,#7b4bff);color:#fff}
+    section.connect{padding:72px 0;background:linear-gradient(180deg,#587bff,#7b4bff);color:#000000}
     .connect-inner{max-width:1100px;margin:0 auto;padding:36px}
     .connect-title{text-align:center;margin-bottom:10px}
     .connect-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:28px}
-    .connect-card{background:rgba(255,255,255,0.08);padding:18px;border-radius:12px;backdrop-filter: blur(6px);min-height:64px;display:flex;align-items:center;gap:12px}
-    .connect-card .icon{width:44px;height:44;border-radius:10px;background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center}
+
+    .connect-card{
+      background:rgba(255, 255, 255, 0.797);
+      padding:18px;
+      border-radius:12px;
+      backdrop-filter: blur(6px);
+      min-height:64px;
+      display:flex;
+      align-items:center;
+      gap:12px
+      }
+
+    .connect-card .icon{
+      width:44px;
+      height:44;
+      border-radius:10px;
+      background:rgba(255,255,255,0.12);
+      display:flex;
+      align-items:center;
+      justify-content:center
+      }
+      
     .connect-card h4{margin:0;font-size:14px}
     .location-card{grid-column:1/-1;display:flex;justify-content:center}
 
@@ -234,6 +252,11 @@
           <div class="icon">🎓</div>
           <div>
             <h4>Education</h4>
+            <h5>Elementary</h5>
+            <p>Tejero Elementary School(2010 - 2016)</p>
+            <h5>High School</h5>
+            <p>Abellana National School(2019 - 2021)</p>
+            <h5>College</h5>
             <p>University of Cebu Main Campus — BS Information Technology (2023 - 2026)</p>
           </div>
         </div>
@@ -242,7 +265,11 @@
           <div class="icon">💼</div>
           <div>
             <h4>Personnal Information</h4>
-            <p>Currently seeking OJT/Internship opportunities to apply my frontend development skills.</p>
+            <h5>Birth Date</h5>
+            <p>August 14, 2004</p>
+            <h5>Address</h5>
+            <p>906-F, M J Cuenco Avenue, Brgy T. Padilla, Sitio Lower Lomas, Cebu City, Philippines</p>
+
           </div>
         </div>
       </div>
@@ -318,16 +345,16 @@
     <section id="connect" class="connect">
       <div class="connect-inner container card-muted">
         <div class="connect-title">
-          <h2 style="color:#fff;margin:0">Let's Connect</h2>
-          <p style="color:rgba(255,255,255,0.85);margin:8px 0 0">I'm always open to new opportunities and collaborations</p>
+          <h2 style="color:#000000;margin:0">Let's Connect</h2>
+          <p style="color:rgba(0, 0, 0, 0.85);margin:8px 0 0">I'm always open to new opportunities and collaborations</p>
         </div>
 
         <div class="connect-grid" role="list">
-          <a class="connect-card" href="mailto:lourdynndong@gmail.com" role="listitem">
+          <a class="connect-card">
             <div class="icon">✉️</div>
             <div>
-              <h4 style="margin:0">Email</h4>
-              <div style="opacity:.95;font-size:13px">lourdynndong@gmail.com</div>
+              <h4 style="margin:0;color:#000000">Email</h4>
+              <div style="opacity:.95;color:#000000;font-size:13px">lourdynndong@gmail.com</div>
             </div>
           </a>
 
@@ -366,12 +393,6 @@
             </a>
           </div>
         </div>
-          <div class="location-card" style="margin-top:12px">
-            <div class="card" style="max-width:520px;border-radius:12px;background:rgba(255,255,255,0.08);color:#fff">
-              <strong style="display:block;margin-bottom:8px">Location</strong>
-              <div style="opacity:.95;font-size:13px">906-F, M J Cuenco Avenue, Brgy T. Padilla, Sitio Lower Lomas, Cebu City, Philippines</div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -381,56 +402,6 @@
   <footer>
     © 2024 Lourdyn Neil M. Verdida — Built with HTML, CSS & minimal JS
   </footer>
-
-  <script>
-  // safer active-nav script: ignore non-hash hrefs and missing targets
-  const links = Array.from(document.querySelectorAll('nav.nav a'));
-
-  // map only valid in-page links to their section elements
-  const linkSections = links
-    .map(link => {
-      const href = link.getAttribute('href');
-      if (!href || !href.startsWith('#')) return null;
-      const section = document.querySelector(href);
-      if (!section) return null;
-      return { link, section };
-    })
-    .filter(Boolean);
-
-  const offset = 120;
-
-  function updateActive() {
-    const y = window.scrollY + offset;
-    // clear all first
-    links.forEach(l => l.classList.remove('active'));
-    // find the first section that matches the viewport position
-    for (const { link, section } of linkSections) {
-      if (section.offsetTop <= y && section.offsetTop + section.offsetHeight > y) {
-        link.classList.add('active');
-        break;
-      }
-    }
-  }
-
-  // smooth scroll that accounts for the offset (keeps header visible)
-  links.forEach(link => {
-    const href = link.getAttribute('href');
-    if (!href || !href.startsWith('#')) return;
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const target = document.querySelector(href);
-      if (!target) return;
-      const top = target.getBoundingClientRect().top + window.scrollY - (offset - 20);
-      window.scrollTo({ top, behavior: 'smooth' });
-      history.replaceState(null, '', href);
-      updateActive();
-    });
-  });
-
-  window.addEventListener('scroll', updateActive, { passive: true });
-  window.addEventListener('resize', updateActive);
-  window.addEventListener('load', updateActive);
-</script>
 </body>
  <script>
   // safe active-nav + smooth scroll: skip non-hash links and missing sections
